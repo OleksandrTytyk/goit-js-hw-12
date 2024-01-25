@@ -45,5 +45,5 @@ function fetchData(searchQuery) {
         per_page: 15,
       },
     })
-    .then({data} => console.log(data.data.hits));
+    .then(({data}) => console.log(data.hits));
 }
