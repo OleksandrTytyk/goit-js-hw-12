@@ -33,6 +33,8 @@ refs.form.addEventListener('submit', handleImageSearchSubmit);
 async function handleImageSearchSubmit(event) {
   event.preventDefault();
 
+  page = 1;
+
   clearGallery();
 
   refs.loader.style.display = 'block';
@@ -55,7 +57,7 @@ async function handleImageSearchSubmit(event) {
   try {
     const { hits, totalHits } = await fetchData(searchQuery);
 
-    maxPage = Math.ceil(totalHits / 15);
+    maxPage = Math.ceil(totalHits / 40);
 
     createMarkup(hits);
 
@@ -85,7 +87,7 @@ async function fetchData(searchQuery, page = 1) {
         orientation: 'horizontal',
         safesearch: 'true',
         page,
-        per_page: 15,
+        per_page: 40,
       },
     });
 
@@ -130,6 +132,7 @@ async function handleLoadMore(event) {
     console.error(error);
   } finally {
     refs.loadMore.disabled = false;
+    
     if (page === maxPage) {
       refs.loadMore.classList.add(hiddenClass);
       refs.loadMore.removeEventListener('click', handleLoadMore);
