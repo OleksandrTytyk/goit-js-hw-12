@@ -55,7 +55,7 @@ async function handleImageSearchSubmit(event) {
   try {
     const { hits, totalHits } = await fetchData(searchQuery);
 
-    maxPage = Math.ceil(totalHits / 40);
+    maxPage = Math.ceil(totalHits / 15);
 
     createMarkup(hits);
 
@@ -85,7 +85,7 @@ async function fetchData(searchQuery, page = 1) {
         orientation: 'horizontal',
         safesearch: 'true',
         page,
-        per_page: 40,
+        per_page: 15,
       },
     });
 
